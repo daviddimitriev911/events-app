@@ -25,7 +25,7 @@ Fill in `MONGO_URI` `DB_NAME` and `SECRET` in `.env.local` where:
 In your terminal run:
 
 ```bash
-npm dun dev
+npm run dev
 
 ```
 

@@ -1,16 +1,15 @@
 "use client";
 import EventCard from "@/components/EventCard";
 import axios from "axios";
-import Image from "next/image";
 import { useState, useEffect } from "react";
 
-export default function Home() {
+export default function ArchivePage() {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const fetchEvents = async () => {
     try {
-      const response = await axios.get("/api/events/upcomming");
+      const response = await axios.get("/api/events/old");
       setEvents(response.data);
       setLoading(false);
     } catch (error) {
@@ -24,12 +23,13 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="bg-gray-50 pb-8 dark:bg-gray-900 pt-8 flex flex-row gap-5 flex-wrap mx-auto max-w-7xl justify-center">
+    <div className="bg-gray-50 dark:bg-gray-900 py-8  flex flex-row gap-5 flex-wrap mx-auto max-w-7xl justify-center">
       {events && (
         <>
           {events.map((event) => {
             return (
               <EventCard
+                actions="OFF"
                 key={event._id}
                 event={event}
                 fetchEvents={fetchEvents}
@@ -39,7 +39,7 @@ export default function Home() {
         </>
       )}
       {!loading && (!events || events.length === 0) && (
-        <div className="pt-56">There are no Upcoming Events at the moment</div>
+        <div className="pt-56">There are no Archived Events at the moment</div>
       )}
     </div>
   );
